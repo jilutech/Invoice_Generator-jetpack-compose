@@ -90,11 +90,11 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                     width = Dimension.fillToConstraints
                 }
                 .onFocusEvent {
-                    if (it.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
+//                    if (it.isFocused) {
+//                        coroutineScope.launch {
+//                            bringIntoViewRequester.bringIntoView()
+//                        }
+//                    }
                 },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
@@ -120,11 +120,11 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                     width = Dimension.fillToConstraints
                 }
                 .onFocusEvent {
-                    if (it.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
+//                    if (it.isFocused) {
+//                        coroutineScope.launch {
+//                            bringIntoViewRequester.bringIntoView()
+//                        }
+//                    }
                 },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
@@ -150,11 +150,11 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                     width = Dimension.fillToConstraints
                 }
                 .onFocusEvent {
-                    if (it.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
+//                    if (it.isFocused) {
+//                        coroutineScope.launch {
+//                            bringIntoViewRequester.bringIntoView()
+//                        }
+//                    }
                 },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
@@ -218,9 +218,9 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                     })
                 }
                 is  Resource.Success -> {
-                    LaunchedEffect(Unit) {
-                        context.startNewActivity(MainActivity::class.java)
-                    }
+//                    LaunchedEffect(Unit) {
+//                        context.startNewActivity(MainActivity::class.java)
+//                    }
                 }
             }
         }

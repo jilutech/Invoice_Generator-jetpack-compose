@@ -16,8 +16,8 @@ fun AuthNavHost(navController: NavHostController) {
         composable(AppScreen.Auth.Login.route) {
             LoginScreen(hiltViewModel(), navController)
         }
-//        composable(AppScreen.Auth.Signup.route) {
-//            SignupScreen(hiltViewModel(), navController)
-//        }
+        composable(AppScreen.Auth.Signup.route) {
+            SignupScreen(hiltViewModel(), navController)
+        }
     }
 }

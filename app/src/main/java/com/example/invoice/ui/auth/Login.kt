@@ -85,11 +85,11 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     width = Dimension.fillToConstraints
                 }
                 .onFocusEvent {
-                    if (it.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
+//                    if (it.isFocused) {
+//                        coroutineScope.launch {
+//                            bringIntoViewRequester.bringIntoView()
+//                        }
+//                    }
                 },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
@@ -116,11 +116,11 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     width = Dimension.fillToConstraints
                 }
                 .onFocusEvent {
-                    if (it.isFocused) {
-                        coroutineScope.launch {
-                            bringIntoViewRequester.bringIntoView()
-                        }
-                    }
+//                    if (it.isFocused) {
+//                        coroutineScope.launch {
+//                            bringIntoViewRequester.bringIntoView()
+//                        }
+//                    }
                 },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
@@ -175,9 +175,9 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Success -> {
-                    LaunchedEffect(Unit) {
-                        context.startNewActivity(MainActivity::class.java)
-                    }
+//                    LaunchedEffect(Unit) {
+//                        context.startNewActivity(MainActivity::class.java)
+//                    }
                 }
                 Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
