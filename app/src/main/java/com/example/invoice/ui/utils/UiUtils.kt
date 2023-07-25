@@ -1,4 +1,4 @@
-package com.example.invoice.ui
+package com.example.invoice.ui.utils
 
 import android.app.Activity
 import android.content.Context

@@ -2,6 +2,8 @@ package com.example.invoice.di
 
 import com.example.invoice.data.auth.AuthRepository
 import com.example.invoice.data.auth.AuthRepositoryImpl
+import com.example.invoice.data.home.repo.CustomerRepositoryImpl
+import com.example.invoice.data.home.repo.models.CustomerRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -22,4 +24,7 @@ class AppModule {
     @Provides
     fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
 
-   }
+    @Provides
+    fun provideCustomerRepo(impl: CustomerRepositoryImpl) : CustomerRepository =impl
+
+}

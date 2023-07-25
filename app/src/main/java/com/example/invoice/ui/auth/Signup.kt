@@ -1,5 +1,6 @@
 package com.example.invoice.ui.auth
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -24,19 +25,13 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.invoice.MainActivity
 import com.example.invoice.R
 import com.example.invoice.data.Resource
 import com.example.invoice.ui.AppScreen
-import com.example.invoice.ui.startNewActivity
-import com.example.invoice.ui.theme.InvoiceTheme
 import com.example.invoice.ui.theme.spacing
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -172,6 +167,8 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
 
         Button(
             onClick = {
+               viewModel.signupFlow
+
                 viewModel.signup(name.trim(), email.trim(), password.trim())
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
@@ -207,7 +204,9 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
         signupFlow.value?.let {
             when (it) {
                 is Resource.Failure -> {
+                    Log.e("Resource.Failure","Resource.Failure")
                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
+
                 }
                 Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
@@ -218,6 +217,8 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                     })
                 }
                 is  Resource.Success -> {
+                    Log.e("insideView Success","insideView Success")
+
 //                    LaunchedEffect(Unit) {
 //                        context.startNewActivity(MainActivity::class.java)
 //                    }

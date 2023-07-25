@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.invoice.ui.AppScreen
+import com.example.invoice.ui.home.customers.ManageCustomer
 
 @Composable
 fun AuthNavHost(navController: NavHostController) {
@@ -19,5 +20,12 @@ fun AuthNavHost(navController: NavHostController) {
         composable(AppScreen.Auth.Signup.route) {
             SignupScreen(hiltViewModel(), navController)
         }
+        composable(AppScreen.Customers.ManageCustomer.route) {
+            ManageCustomer(hiltViewModel(), navController)
+        }
+        composable(AppScreen.Customers.route) {
+            SignupScreen(hiltViewModel(), navController)
+        }
+
     }
 }

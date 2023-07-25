@@ -22,17 +22,13 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
-import com.example.invoice.MainActivity
 import com.example.invoice.R
 import com.example.invoice.data.Resource
 import com.example.invoice.ui.AppScreen
-import com.example.invoice.ui.startNewActivity
 import com.example.invoice.ui.theme.spacing
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -91,7 +87,7 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
 //                        }
 //                    }
                 },
-            keyboardOptions = KeyboardOptions(
+                keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrect = false,
                 keyboardType = KeyboardType.Email,

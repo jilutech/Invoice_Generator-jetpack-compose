@@ -15,6 +15,7 @@ import com.example.invoice.ui.BaseActivity
 import com.example.invoice.ui.auth.AuthNavHost
 import com.example.invoice.ui.auth.LoginScreen
 import com.example.invoice.ui.theme.InvoiceTheme
+import com.example.invoice.ui.utils.FullScreenProgressbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,9 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             InvoiceTheme {
-                AuthNavHost(rememberNavController())
+//                AuthNavHost(rememberNavController())
+                FullScreenProgressbar(
+                )
             }
         }
     }

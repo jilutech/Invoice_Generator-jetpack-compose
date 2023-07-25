@@ -1,5 +1,6 @@
 package com.example.invoice.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
@@ -31,6 +32,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+
     fun login(email: String, password: String) = viewModelScope.launch {
         _loginFlow.value = Resource.Loading
         val result = repository.login(email, password)
@@ -41,6 +43,8 @@ class AuthViewModel @Inject constructor(
         _signupFlow.value = Resource.Loading
         val result = repository.signup(name, email, password)
         _signupFlow.value = result
+        Log.e("insideViewModel","insideViewModel")
+
     }
 
     fun logout() {
