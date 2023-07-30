@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.invoice.ui.AppScreen
 import com.example.invoice.ui.BaseActivity
 import com.example.invoice.ui.auth.AuthNavHost
 import com.example.invoice.ui.auth.LoginScreen
+import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.theme.InvoiceTheme
 import com.example.invoice.ui.utils.FullScreenProgressbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +27,8 @@ class MainActivity : BaseActivity() {
         setContent {
             InvoiceTheme {
 //                AuthNavHost(rememberNavController())
-                FullScreenProgressbar(
-                )
+                ManageCustomer(customersViewModel = null, navController = rememberNavController(
+                ))
             }
         }
     }

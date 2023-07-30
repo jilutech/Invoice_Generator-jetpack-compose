@@ -1,5 +1,6 @@
 package com.example.invoice.ui.home.customers
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.invoice.data.Resource
@@ -48,6 +49,7 @@ class CustomersViewModel @Inject constructor(
         _customers.value = customerRepository.getCustomers()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun validateInputs(){
         _areInputValid.value =
               name.value.trim().isNotEmpty() && address.value.trim().isNotEmpty() && phone.value.trim().isNotEmpty()

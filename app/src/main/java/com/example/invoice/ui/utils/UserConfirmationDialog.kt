@@ -2,6 +2,9 @@ package com.example.invoice.ui.utils
 
 import android.content.res.Configuration
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,14 +21,34 @@ fun UserConfirmationDialog(onComplete : (shallDeleted : Boolean) -> Unit){
                            onComplete.invoke(false)
         },
         confirmButton = {
-                    
-                        onComplete.invoke(true)
+
+
+            TextButton(onClick = {
+                                    onComplete.invoke(true)
+                                 },
+                      content = {
+                          Text(
+                              text = stringResource(id = R.string.ok),
+                              color = androidx.compose.material3.MaterialTheme.colorScheme.error
+                          )
+                      }
+            )
         },
         dismissButton = {
-                        onComplete.invoke(false)
+
+                        TextButton(onClick = {
+                            onComplete.invoke(false)
+                        },
+                        content = {
+                            Text(text = stringResource(R.string.cancel),
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.error
+                                )
+                        }
+                            )
         },
         text = {
-            stringResource(id = R.string.ok)
+            Text(text = stringResource(id = R.string.delete_confirmation),style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+
         }
         )
 
