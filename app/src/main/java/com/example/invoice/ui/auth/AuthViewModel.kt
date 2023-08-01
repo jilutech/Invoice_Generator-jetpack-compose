@@ -29,18 +29,43 @@ class AuthViewModel @Inject constructor(
     private val _are_validate = MutableLiveData(false)
     val are_validate : LiveData<Boolean?> = _are_validate
     val currentUser: FirebaseUser?
-
-
         get() = repository.currentUser
-    private val _loginState = MutableStateFlow(LoginState.IDLE)
-    val loginState: StateFlow<LoginState>
-        get() = _loginState
+
     init {
         if (repository.currentUser != null) {
             _loginFlow.value = Resource.Success(repository.currentUser!!)
         }
     }
 
+    fun loginValidation(email: String, password: String,onAuthenticated: () -> Unit,onAuthenticatedFailed: (error: String) -> Unit){
+        if (email.trim().isNotEmpty() && password.trim().isNotEmpty()){
+            _loginFlow.value = Resource.Loading
+            viewModelScope.launch {
+                repository.login(
+                    email, password
+                ).let {
+                    when(it){
+                        is Resource.Success ->{
+                            onAuthenticated()
+                            _loginFlow.value = it
+                        }
+                        is Resource.Failure -> {
+                            onAuthenticatedFailed(it.exception.message!!)
+                            _loginFlow.value = null
+                        }
+
+                        else -> {
+                            _loginFlow.value = null
+                        }
+                    }
+                }
+            }
+        }else{
+            onAuthenticatedFailed("Missing fields")
+            _loginFlow.value = null
+        }
+
+    }
     fun login(email: String, password: String){
         viewModelScope.launch {
             _loginFlow.value = Resource.Loading
@@ -49,11 +74,11 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun signup(name: String, email: String, password: String) = viewModelScope.launch {
-        _signupFlow.value = Resource.Loading
-        val result = repository.signup(name, email, password)
-        _signupFlow.value = result
-    }
+//    fun signup(name: String, email: String, password: String) = viewModelScope.launch {
+//        _signupFlow.value = Resource.Loading
+//        val result = repository.signup(name, email, password)
+//        _signupFlow.value = result
+//    }
 
     fun signUpValidation(name: String, email: String, password: String,onAuthenticated:()->Unit,onAuthenticatedFailed: (error : String) -> Unit){
 
@@ -79,7 +104,7 @@ class AuthViewModel @Inject constructor(
             }
 
         } else{
-            onAuthenticatedFailed("it.exception.message!!")
+            onAuthenticatedFailed("Fill the forms")
             _signupFlow.value = null
         }
     }

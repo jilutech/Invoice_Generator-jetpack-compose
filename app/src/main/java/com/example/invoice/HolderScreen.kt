@@ -111,6 +111,7 @@ fun Navigation(navController: NavHostController, onStatusBarColorChange: (color:
         }
         composable(AppScreen.Customers.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
+            SignupScreen(hiltViewModel(), navController)
         }
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
@@ -118,7 +119,7 @@ fun Navigation(navController: NavHostController, onStatusBarColorChange: (color:
         }
         composable(AppScreen.MyBusinesses.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-//                    ProfileScreen()
+            LoginScreen(hiltViewModel(), navController)
         }
         composable(AppScreen.Logout.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
@@ -136,12 +137,8 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     onItemClick: (BottomNavItem) -> Unit
 ) {
-    Divider()
+//    Divider()
     val currentDestinationAsState = getActiveRoute(navController = navControllerHost)
-
-
-
-
 
     val backStackEntry = navController.currentBackStackEntryAsState()
     NavigationBar(
@@ -149,7 +146,6 @@ fun BottomNavigationBar(
         containerColor = Color.White,
         tonalElevation = 5.dp
     ) {
-        NavigationBar {
             items.forEach { item ->
                 if (currentDestinationAsState in items.map { it.route }) {
                     val selected = item.route == backStackEntry.value?.destination?.route
@@ -176,7 +172,6 @@ fun BottomNavigationBar(
                     )
                 }
             }
-        }
     }
 }
 

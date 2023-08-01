@@ -133,7 +133,21 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
 
         Button(
             onClick = {
-                viewModel.login(email.trim(), password.trim())
+                viewModel.loginValidation(
+                    email.trim(), password.trim(),
+                    onAuthenticated = {
+                        navController.navigate(AppScreen.Dashboard.route) {
+                            popUpTo(AppScreen.Auth.Login.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    onAuthenticatedFailed = {
+                        it
+                        Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                    }
+
+                )
             },
             modifier = Modifier.constrainAs(refButtonLogin) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -165,15 +179,6 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
 
         loginFlow.value?.let {
             when (it) {
-                is Resource.Failure -> {
-                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
-                }
-                is Resource.Success -> {
-                    LaunchedEffect(Unit){
-
-                    }
-
-                }
                 Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
                         top.linkTo(parent.top)
@@ -182,6 +187,8 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                         end.linkTo(parent.end)
                     })
                 }
+
+                else -> {}
             }
         }
     }
