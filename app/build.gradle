@@ -91,6 +91,9 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-insets-ui:0.24.7-alpha"
 
+    // Lotti file
+    def lottie_files = "4.2.1"
+    implementation "com.airbnb.android:lottie-compose:$lottie_files"
 }
 
 kapt {

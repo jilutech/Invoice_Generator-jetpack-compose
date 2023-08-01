@@ -15,6 +15,7 @@ data class Spacing(
     val xLarge: Dp = 64.dp,
     val xxLarge: Dp = 96.dp,
     val xxxLarge: Dp = 128.dp,
+    val xxxxLarge: Dp = 228.dp,
 
     val drawerWidth: Dp = 360.dp,
     val drawerIconSize: Dp = 24.dp,

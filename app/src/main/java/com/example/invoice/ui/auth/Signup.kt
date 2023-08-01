@@ -17,14 +17,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
@@ -41,6 +44,7 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
     var password by remember { mutableStateOf("") }
 
     val signupFlow = viewModel.signupFlow.collectAsState()
+    val validated = viewModel.are_validate
 
     val coroutineScope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
@@ -69,107 +73,117 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
             AuthHeader()
         }
 
-        TextField(
-            value = name,
-            onValueChange = {
-                name = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.name))
-            },
-            modifier = Modifier
-                .constrainAs(refName) {
-                    top.linkTo(refHeader.bottom, spacing.xLarge)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                }
-                .onFocusEvent {
-//                    if (it.isFocused) {
-//                        coroutineScope.launch {
-//                            bringIntoViewRequester.bringIntoView()
-//                        }
-//                    }
-                },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
-            )
-        )
+        OutlinedTextField(
+                    value = name, onValueChange ={
+                    name = it
+                    },
+                    modifier = Modifier
+                        .constrainAs(refName) {
+                            top.linkTo(refHeader.bottom, spacing.xLarge)
+                            start.linkTo(parent.start, spacing.large)
+                            end.linkTo(parent.end, spacing.large)
+                            width = Dimension.fillToConstraints
+                        },
+                    label = {
+                            Text(text = stringResource(id = R.string.name))
+                         },
+                    placeholder = {
+                            Text(text = stringResource(id = R.string.name)
+                            )
+                           },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Black,
+                        focusedIndicatorColor = Color.Black,
+                        containerColor= Color.White,
 
-        TextField(
-            value = email,
-            onValueChange = {
-                email = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.email))
-            },
-            modifier = Modifier
-                .constrainAs(refEmail) {
-                    top.linkTo(refName.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                }
-                .onFocusEvent {
-//                    if (it.isFocused) {
-//                        coroutineScope.launch {
-//                            bringIntoViewRequester.bringIntoView()
-//                        }
-//                    }
-                },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
-            )
-        )
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
+         )
+        OutlinedTextField(
+                    value = email, onValueChange ={
+                    email = it
+                    },
+                    modifier = Modifier
+                    .constrainAs(refEmail) {
+                        top.linkTo(refName.bottom, spacing.medium)
+                        start.linkTo(parent.start, spacing.large)
+                        end.linkTo(parent.end, spacing.large)
+                        width = Dimension.fillToConstraints
+                    },
+                    label = {
+                            Text(text = stringResource(id = R.string.email))
+                         },
+                    placeholder = {
+                            Text(text = stringResource(id = R.string.email)
+                            )
+                           },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Black,
+                        focusedIndicatorColor = Color.Black,
+                        containerColor= Color.White,
 
-        TextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.password))
-            },
-            modifier = Modifier
-                .constrainAs(refPassword) {
-                    top.linkTo(refEmail.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                }
-                .onFocusEvent {
-//                    if (it.isFocused) {
-//                        coroutineScope.launch {
-//                            bringIntoViewRequester.bringIntoView()
-//                        }
-//                    }
-                },
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager.clearFocus()
-                }
-            )
-        )
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
+         )
+        OutlinedTextField(
+                    value = password, onValueChange ={
+                    password = it
+                    },
 
+                    modifier = Modifier
+                        .constrainAs(refPassword) {
+                            top.linkTo(refEmail.bottom, spacing.medium)
+                            start.linkTo(parent.start, spacing.large)
+                            end.linkTo(parent.end, spacing.large)
+                            width = Dimension.fillToConstraints
+                      },
+                    label = {
+                            Text(text = stringResource(id = R.string.password))
+                         },
+                    placeholder = {
+                            Text(text = stringResource(id = R.string.password)
+                            )
+                           },
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Black,
+                        focusedIndicatorColor = Color.Black,
+                        containerColor= Color.White,
+
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
+         )
         Button(
             onClick = {
-               viewModel.signupFlow
-
-                viewModel.signup(name.trim(), email.trim(), password.trim())
+                viewModel.signUpValidation(
+                        name.trim(), email.trim(), password.trim(),
+                        onAuthenticated = {
+//                            navController.popBackStack()
+                            navController.navigate(AppScreen.Dashboard.route) {
+                                popUpTo(AppScreen.Auth.Login.route) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        onAuthenticatedFailed = {
+                            it
+                            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                        }
+                    )
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -178,7 +192,10 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
                 width = Dimension.fillToConstraints
             }
         ) {
-            Text(text = stringResource(id = R.string.signup), style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = stringResource(id = R.string.signup),
+                style = MaterialTheme.typography.titleMedium
+            )
         }
 
 
@@ -200,47 +217,22 @@ fun SignupScreen(viewModel: AuthViewModel, navController: NavHostController) {
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
         )
-
         signupFlow.value?.let {
             when (it) {
-                is Resource.Failure -> {
-                    Log.e("Resource.Failure","Resource.Failure")
-                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
-
-                }
                 Resource.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
+                        CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
+                            top.linkTo(parent.top)
+                            bottom.linkTo(parent.bottom)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        })
                 }
-                is  Resource.Success -> {
-                    Log.e("insideView Success","insideView Success")
+                else -> {
 
-//                    LaunchedEffect(Unit) {
-//                        context.startNewActivity(MainActivity::class.java)
-//                    }
                 }
             }
         }
 
+
     }
 }
-
-//@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-//@Composable
-//fun SignupScreenPreviewLight() {
-//    InvoiceTheme {
-//        SignupScreen(FakeViewModelProvider.provideAuthViewModel(), rememberNavController())
-//    }
-//}
-
-//@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-//@Composable
-//fun SignupScreenPreviewDark() {
-//    AppTheme {
-//        SignupScreen(FakeViewModelProvider.provideAuthViewModel(), rememberNavController())
-//    }
-//}

@@ -70,4 +70,6 @@
     <string name="amount">amount</string>
     <string name="invoice_amount">Invoice Amount</string>
     <string name="tax">Tax</string>
+    <string name="home">Home</string>
+
 </resources>

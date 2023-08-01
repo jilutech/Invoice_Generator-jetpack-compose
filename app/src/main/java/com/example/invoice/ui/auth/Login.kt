@@ -65,7 +65,7 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
         }
 
 
-        TextField(
+        OutlinedTextField(
             value = email,
             onValueChange = {
                 email = it
@@ -95,7 +95,7 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             )
         )
 
-        TextField(
+        OutlinedTextField(
             value = password,
             onValueChange = {
                 password = it
@@ -154,9 +154,7 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     end.linkTo(parent.end, spacing.xLarge)
                 }
                 .clickable {
-                    navController.navigate(AppScreen.Auth.Signup.route) {
-                        popUpTo(AppScreen.Auth.Login.route) { inclusive = true }
-                    }
+                    navController.navigate(AppScreen.Auth.Signup.route)
                 }
                 .bringIntoViewRequester(bringIntoViewRequester),
             text = stringResource(id = R.string.dont_have_account),
@@ -171,9 +169,10 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Success -> {
-//                    LaunchedEffect(Unit) {
-//                        context.startNewActivity(MainActivity::class.java)
-//                    }
+                    LaunchedEffect(Unit){
+
+                    }
+
                 }
                 Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {

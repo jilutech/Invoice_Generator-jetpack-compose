@@ -1,11 +1,16 @@
-
-package com.example.invoice.ui
+package com.example.invoice.sealed
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.invoice.R
 
-sealed class AppScreen(@StringRes val title: Int?=null, @DrawableRes val icon: Int?=null, val route: String) {
+sealed class AppScreen(
+
+    @StringRes val title : Int ? = null,
+    @DrawableRes val icon: Int ? = null,
+    val route: String,
+){
+    object Splash : AppScreen(route = "splash")
 
     object Auth : AppScreen(R.string.app_name, R.drawable.ic_app_logo, "nav_auth") {
         object Login : AppScreen(R.string.login, R.drawable.ic_app_logo, "login")
@@ -41,5 +46,5 @@ sealed class AppScreen(@StringRes val title: Int?=null, @DrawableRes val icon: I
     }
 
     object Logout : AppScreen(R.string.logout, R.drawable.ic_logout, "logout")
-    object Splash : AppScreen(route = "splash")
+
 }
