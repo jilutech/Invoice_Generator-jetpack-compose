@@ -46,7 +46,7 @@ class CustomersViewModel @Inject constructor(
 
     }
 
-    private suspend fun getCustomers(){
+    private suspend fun getCustomers() {
         _customers.value = Resource.Loading
         _customers.value = customerRepository.getCustomers()
     }
@@ -73,6 +73,7 @@ class CustomersViewModel @Inject constructor(
             it.id = _isUpdating.value ?: throw IllegalArgumentException("Business Id is null, you must call setUpdating() first")
         }
         _manageCustomerResult.value = customerRepository.updateCustomer(custmomer)
+        getCustomers()
     }
 
     fun delete()  = viewModelScope.launch {

@@ -33,7 +33,10 @@ import com.example.invoice.ui.SplashScreen
 import com.example.invoice.ui.auth.LoginScreen
 import com.example.invoice.ui.auth.SignupScreen
 import com.example.invoice.ui.home.customers.Customers
+import com.example.invoice.ui.home.customers.CustomersViewModel
+import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.home.dashboard.DashboardScreen
+import com.example.invoice.ui.utils.getViewModelInstance
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -109,14 +112,15 @@ fun Navigation(
             onStatusBarColorChange(MaterialTheme.colors.background)
             DashboardScreen()
         }
-        composable(AppScreen.Taxes.route) {
-            onStatusBarColorChange(MaterialTheme.colors.background)
-//                    SearchScreen()
-        }
         composable(AppScreen.Customers.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
             Customers(customersViewModel = hiltViewModel(), navController =navController )
         }
+        composable(AppScreen.Customers.ManageCustomer.route) {
+            val vm = navController.getViewModelInstance<CustomersViewModel>(it, AppScreen.Customers.route)
+            ManageCustomer(vm, navController)
+
+          }
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
 //                    NotificationScreen()

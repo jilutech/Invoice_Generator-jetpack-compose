@@ -1,6 +1,7 @@
 package com.example.invoice.ui.home.customers
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -47,37 +48,43 @@ fun Customers(customersViewModel: CustomersViewModel,navController: NavControlle
                      )
                  }
              },
-             content = {
-                 customers.value?.let {
-                     when(it) {
-                         is Resource.Loading -> {
-                             FullScreenProgressbar()
-                         }
-                         is Resource.Success -> {
-                              if (it.result.isEmpty()){
-                                  EmptyScreen(title = stringResource(id = R.string.empty_customer)) {
+           content = {
+            customers.value?.let {
+                when (it) {
+                    is Resource.Failure -> {
+                        context.toast(it.exception.message!!)
+                        Log.e("Failure","1")
+                    }
+                    Resource.Loading -> {
+                        FullScreenProgressbar()
+                        Log.e("loading","2")
+                    }
+                    is Resource.Success -> {
+                        if (it.result.isEmpty()) {
+                            EmptyScreen(title = stringResource(id = R.string.empty_customer)) {
+                                Log.e("isEmpty","3")
 
-                                  }
-                              }else{
-                                  LazyColumn{
-                                      items(it.result){ item ->
-                                          Customer(customer = item,
-                                                  onClick = {
-                                                      customersViewModel.setUpdating(item)
-                                                      navController.navigate(AppScreen.Customers.ManageCustomer.route)
-                                                  }
-                                              )
-                                      }
-                                  }
+                            }
+                        } else {
+                            Log.e("notisEmpty","4")
+                            LazyColumn {
+                                items(it.result) { item ->
+                                    Log.e("result","5")
+                                    Customer(
+                                        customer = item,
+                                        onClick = {
+                                            customersViewModel.setUpdating(item)
+                                            navController.navigate(AppScreen.Customers.ManageCustomer.route)
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-                              }
-                         }
-                         is Resource.Failure -> {
-                           context.toast(it.exception.message!!)
-                         }
-                     }
-                 }
-             }
-        )
+    )
 
 }
