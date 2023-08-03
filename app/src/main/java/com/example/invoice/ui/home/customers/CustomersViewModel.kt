@@ -36,7 +36,9 @@ class CustomersViewModel @Inject constructor(
 
     private val _customers = MutableStateFlow<Resource<List<Customer>>?>(null)
     val customer : StateFlow<Resource<List<Customer>>?> = _customers
-
+    init {
+        init()
+    }
 
 
     private fun init() = viewModelScope.launch {

@@ -1,9 +1,9 @@
 package com.example.invoice
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -17,7 +17,6 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -77,16 +76,21 @@ fun HolderScreen(
             })
         },
         modifier = Modifier.fillMaxSize()
-    ) {
-        Navigation(navController = controller,onStatusBarColorChange)
+    ) {innerpadding ->
+        Navigation(navController = controller,onStatusBarColorChange,innerpadding)
     }
 }
 
 @Composable
-fun Navigation(navController: NavHostController, onStatusBarColorChange: (color: Color) -> Unit){
+fun Navigation(
+    navController: NavHostController,
+    onStatusBarColorChange: (color: Color) -> Unit,
+    innerpadding: PaddingValues
+){
     NavHost(
         navController = navController,
-        startDestination = AppScreen.Splash.route
+        startDestination = AppScreen.Splash.route,
+        modifier = Modifier.padding(innerpadding)
     ) {
         composable(AppScreen.Splash.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)

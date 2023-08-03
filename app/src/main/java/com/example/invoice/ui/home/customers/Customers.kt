@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.example.invoice.R
 import com.example.invoice.data.Resource
 import com.example.invoice.ui.AppScreen
+import com.example.invoice.ui.utils.EmptyScreen
 import com.example.invoice.ui.utils.FullScreenProgressbar
 import com.example.invoice.ui.utils.toast
 
@@ -54,7 +55,9 @@ fun Customers(customersViewModel: CustomersViewModel,navController: NavControlle
                          }
                          is Resource.Success -> {
                               if (it.result.isEmpty()){
+                                  EmptyScreen(title = stringResource(id = R.string.empty_customer)) {
 
+                                  }
                               }else{
                                   LazyColumn{
                                       items(it.result){ item ->
