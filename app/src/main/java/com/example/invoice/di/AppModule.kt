@@ -3,6 +3,8 @@ package com.example.invoice.di
 import com.example.invoice.data.auth.AuthRepository
 import com.example.invoice.data.auth.AuthRepositoryImpl
 import com.example.invoice.data.home.repo.CustomerRepositoryImpl
+import com.example.invoice.data.home.repo.MyBusinessRepository
+import com.example.invoice.data.home.repo.MyBusinessRepositoryImpl
 import com.example.invoice.data.home.repo.models.CustomerRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,5 +28,8 @@ class AppModule {
 
     @Provides
     fun provideCustomerRepo(impl: CustomerRepositoryImpl) : CustomerRepository =impl
+
+    @Provides
+    fun provideBusinessRepo(imp : MyBusinessRepositoryImpl) : MyBusinessRepository = imp
 
 }

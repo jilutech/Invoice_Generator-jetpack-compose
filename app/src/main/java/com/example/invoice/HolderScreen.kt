@@ -1,14 +1,15 @@
 package com.example.invoice
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,10 +34,15 @@ import com.example.invoice.sealed.AppScreen
 import com.example.invoice.ui.SplashScreen
 import com.example.invoice.ui.auth.LoginScreen
 import com.example.invoice.ui.auth.SignupScreen
+import com.example.invoice.ui.home.bussiness.BusinessScreen
+import com.example.invoice.ui.home.bussiness.BusinessViewModel
+import com.example.invoice.ui.home.bussiness.ManageMyBusiness
 import com.example.invoice.ui.home.customers.Customers
 import com.example.invoice.ui.home.customers.CustomersViewModel
 import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.home.dashboard.DashboardScreen
+import com.example.invoice.ui.home.invoice.InvoiceScreen
+import com.example.invoice.ui.home.tax.TaxScreen
 import com.example.invoice.ui.utils.getViewModelInstance
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -54,18 +61,28 @@ fun HolderScreen(
                 BottomNavItem(
                     name = "DashBoard",
                     route = AppScreen.Dashboard.route,
-                    icon = Icons.Default.Home
+                    icon = painterResource(id = R.drawable.baseline_space_dashboard_24)
                 ),
                 BottomNavItem(
                     name = "Businesses",
                     route = AppScreen.MyBusinesses.route,
-                    icon = Icons.Default.Star
+                    icon = painterResource(id = R.drawable.ic_my_businesses)
                 ),
                 BottomNavItem(
                     name = "Customers",
                     route = AppScreen.Customers.route,
-                    icon = Icons.Default.Favorite
+                    icon = painterResource(id = R.drawable.ic_customers)
                 ),
+                BottomNavItem(
+                    name = "Invoice",
+                    route = AppScreen.Invoices.route,
+                    icon = painterResource(id = R.drawable.ic_invoices)
+                ),
+                BottomNavItem(
+                    name = "Tax",
+                    route = AppScreen.Taxes.route,
+                    icon = painterResource(id = R.drawable.ic_taxes)
+                )
             ),
              navController = controller, onItemClick = {
                      /** We should navigate to that new route */
@@ -121,17 +138,26 @@ fun Navigation(
             ManageCustomer(vm, navController)
 
           }
-        composable(AppScreen.Invoices.route) {
-            onStatusBarColorChange(MaterialTheme.colors.background)
-//                    NotificationScreen()
-        }
         composable(AppScreen.MyBusinesses.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            LoginScreen(hiltViewModel(), navController)
+            BusinessScreen(businessViewModel = hiltViewModel(), navController =navController )
+        }
+        composable(AppScreen.MyBusinesses.ManageMyBusiness.route){
+            onStatusBarColorChange(MaterialTheme.colors.background)
+            val vm = navController.getViewModelInstance<BusinessViewModel>(it, AppScreen.MyBusinesses.route)
+            ManageMyBusiness(vm,navController)
+        }
+        composable(AppScreen.Taxes.route) {
+            onStatusBarColorChange(MaterialTheme.colors.background)
+            TaxScreen()
         }
         composable(AppScreen.Logout.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-//                    ChatsScreen()
+            TaxScreen()
+        }
+        composable(AppScreen.Invoices.route) {
+            onStatusBarColorChange(MaterialTheme.colors.background)
+            InvoiceScreen()
         }
     }
 }
@@ -165,7 +191,8 @@ fun BottomNavigationBar(
                         icon = {
                             Icon(
                                 item.icon,
-                                contentDescription = item.name
+                                contentDescription = item.name,
+                                modifier = Modifier.size(20.dp)
                             )
                         },
                         selected = selected,
