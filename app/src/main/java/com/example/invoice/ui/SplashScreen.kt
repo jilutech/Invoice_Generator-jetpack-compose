@@ -27,6 +27,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.invoice.LocalNavHost
 import com.example.invoice.R
+import com.example.invoice.sealed.AppScreen
 import com.example.invoice.ui.theme.InvoiceTheme
 import com.example.invoice.ui.theme.spacing
 

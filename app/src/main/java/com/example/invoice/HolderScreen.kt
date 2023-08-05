@@ -42,7 +42,9 @@ import com.example.invoice.ui.home.customers.CustomersViewModel
 import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.home.dashboard.DashboardScreen
 import com.example.invoice.ui.home.invoice.InvoiceScreen
+import com.example.invoice.ui.home.tax.ManageTax
 import com.example.invoice.ui.home.tax.TaxScreen
+import com.example.invoice.ui.home.tax.TaxViewModel
 import com.example.invoice.ui.utils.getViewModelInstance
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -149,11 +151,12 @@ fun Navigation(
         }
         composable(AppScreen.Taxes.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            TaxScreen()
+            TaxScreen(hiltViewModel(), navController = navController)
         }
-        composable(AppScreen.Logout.route) {
+        composable(AppScreen.Taxes.ManageTaxes.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            TaxScreen()
+            val vm = navController.getViewModelInstance<TaxViewModel>(it, AppScreen.Taxes.route)
+            ManageTax(vm,navController)
         }
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
