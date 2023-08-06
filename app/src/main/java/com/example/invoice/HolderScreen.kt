@@ -160,7 +160,7 @@ fun Navigation(
         }
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            InvoiceScreen()
+            InvoiceScreen(hiltViewModel(),navController)
         }
     }
 }
