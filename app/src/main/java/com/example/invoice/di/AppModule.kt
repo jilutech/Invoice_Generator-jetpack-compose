@@ -3,6 +3,8 @@ package com.example.invoice.di
 import com.example.invoice.data.auth.AuthRepository
 import com.example.invoice.data.auth.AuthRepositoryImpl
 import com.example.invoice.data.home.repo.CustomerRepositoryImpl
+import com.example.invoice.data.home.repo.DashboardRepository
+import com.example.invoice.data.home.repo.DashboardRepositoryImpl
 import com.example.invoice.data.home.repo.InvoiceRepository
 import com.example.invoice.data.home.repo.InvoiceRepositoryImpl
 import com.example.invoice.data.home.repo.MyBusinessRepository
@@ -42,4 +44,7 @@ class AppModule {
     @Provides
     fun provideInvoiceRepository(impl: InvoiceRepositoryImpl): InvoiceRepository = impl
 
+
+    @Provides
+    fun provideDashboardRepository(impl: DashboardRepositoryImpl): DashboardRepository = impl
 }

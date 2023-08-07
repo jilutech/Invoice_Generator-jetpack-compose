@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.invoice.sealed.AppScreen
 import com.example.invoice.ui.SplashScreen
 import com.example.invoice.ui.auth.LoginScreen
@@ -43,6 +44,7 @@ import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.home.dashboard.DashboardScreen
 import com.example.invoice.ui.home.invoice.InvoiceScreen
 import com.example.invoice.ui.home.invoice.InvoicesViewModel
+import com.example.invoice.ui.home.invoice.detail.InvoiceDetail
 import com.example.invoice.ui.home.invoice.manage.AddInvoiceItem
 import com.example.invoice.ui.home.invoice.manage.PickBusinessScreen
 import com.example.invoice.ui.home.invoice.manage.PickCustomerScreen
@@ -134,7 +136,7 @@ fun Navigation(
         }
         composable(AppScreen.Dashboard.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            DashboardScreen()
+            DashboardScreen(hiltViewModel())
         }
         composable(AppScreen.Customers.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
@@ -185,6 +187,9 @@ fun Navigation(
         composable(AppScreen.Invoices.ManageInvoice.AddItems.route) {
             val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
             AddInvoiceItem(vm, navController)
+        }
+        composable(AppScreen.Invoices.InvoiceDetail.route) {
+            InvoiceDetail(hiltViewModel(), rememberNavController())
         }
     }
 }
