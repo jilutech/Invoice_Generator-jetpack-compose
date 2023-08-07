@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy Invoice</string>
+    <string name="app_name">Invoice Track</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">login</string>
