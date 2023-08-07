@@ -116,7 +116,8 @@ fun InvoiceCard(invoiceModel: InvoiceModel,onClick : () -> Unit,onMenuClick : (m
 
     }
 }
-const val INR = "₹"
+//const val INR = "₹"
+const val INR = "$"
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun InvoicePreviewLight() {
