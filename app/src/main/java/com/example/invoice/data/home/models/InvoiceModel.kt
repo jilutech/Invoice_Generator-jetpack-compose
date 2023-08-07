@@ -1,11 +1,11 @@
 package com.example.invoice.data.home.models
 
 import com.example.invoice.data.home.repo.models.BaseModel
-import com.example.invoice.data.home.repo.models.Customer
+import com.example.invoice.data.home.repo.models.CustomerModel
 
 data class InvoiceModel(
-    val business: Business? = null,
-    val customer: Customer? = null,
+    val businessModel: BusinessModel? = null,
+    val customer: CustomerModel? = null,
     val tax: TaxModel? = null,
     val listOfItems: List<InvoiceItemModel> = listOf(),
     @field:JvmField

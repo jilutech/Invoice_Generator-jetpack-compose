@@ -2,7 +2,7 @@ package com.example.invoice.data.home.models
 
 import com.example.invoice.data.home.repo.models.BaseModel
 
-data class Business(
+data class BusinessModel(
     val name : String = "",
     val address : String = "",
     val phone : String = "",

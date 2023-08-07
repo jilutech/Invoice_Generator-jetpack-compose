@@ -2,7 +2,6 @@ package com.example.invoice.ui.home.bussiness
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,13 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.invoice.R
-import com.example.invoice.data.home.models.Business
+import com.example.invoice.data.home.models.BusinessModel
 import com.example.invoice.ui.theme.InvoiceTheme
 import com.example.invoice.ui.theme.spacing
-import dagger.Provides
 
 @Composable
-fun BusinessCard(business: Business,onClick : () -> Unit){
+fun BusinessCard(businessModel: BusinessModel, onClick : () -> Unit){
     
     val spacing = MaterialTheme.spacing
 
@@ -58,7 +56,7 @@ fun BusinessCard(business: Business,onClick : () -> Unit){
                        }
             )
             
-            Text(text = business.name,
+            Text(text = businessModel.name,
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.constrainAs(refName){
                     start.linkTo(refIcon.end,spacing.medium)
@@ -68,7 +66,7 @@ fun BusinessCard(business: Business,onClick : () -> Unit){
                 }
             )
             Text(
-                text = business.getCompleteAddress(),
+                text = businessModel.getCompleteAddress(),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.constrainAs(refAddress) {
                     start.linkTo(refName.start)
@@ -85,7 +83,7 @@ fun BusinessCard(business: Business,onClick : () -> Unit){
 @Composable
 fun shw(){
     InvoiceTheme() {
-        BusinessCard(business = Business(
+        BusinessCard(businessModel = BusinessModel(
             "name",
             "aaaa",
             "9999",

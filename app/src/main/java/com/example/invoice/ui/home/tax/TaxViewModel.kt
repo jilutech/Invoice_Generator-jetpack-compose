@@ -62,7 +62,7 @@ class TaxViewModel @Inject constructor(
     fun updateTax() = viewModelScope.launch {
         _manageTax.value = Resource.Loading
         val tax = TaxModel(des.value, taxValue.value.toDouble()).also {
-            it.id = _isUpdating.value ?: throw IllegalArgumentException("Business Id is null, you must call setUpdating() first")
+            it.id = _isUpdating.value ?: throw IllegalArgumentException("BusinessModel Id is null, you must call setUpdating() first")
         }
         _manageTax.value = repository.updateTax(tax)
         getTaxes()

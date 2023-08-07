@@ -2,7 +2,7 @@ package com.example.invoice.data.home.repo
 
 import com.example.invoice.data.Resource
 import com.example.invoice.data.home.BaseRepository
-import com.example.invoice.data.home.models.Business
+import com.example.invoice.data.home.models.BusinessModel
 import com.example.invoice.data.utils.await
 import com.example.invoice.data.utils.currentDateTime
 import com.google.firebase.auth.FirebaseAuth
@@ -12,30 +12,30 @@ import javax.inject.Inject
 class MyBusinessRepositoryImpl @Inject constructor(
     auth: FirebaseAuth,
     firestore: FirebaseFirestore
-) : MyBusinessRepository,BaseRepository<Business>(auth, firestore , DB_MY_BUSINESSES)  {
-    override suspend fun getMyBusinessHolders(): Resource<List<Business>> {
+) : MyBusinessRepository,BaseRepository<BusinessModel>(auth, firestore , DB_MY_BUSINESSES)  {
+    override suspend fun getMyBusinessHolders(): Resource<List<BusinessModel>> {
         return try {
             val snapshot = db.get().await()
-            Resource.Success(getData(snapshot,Business::class.java))
+            Resource.Success(getData(snapshot,BusinessModel::class.java))
         }catch (e: Exception) {
             Resource.Failure(e)
         }
     }
 
-    override suspend fun addMyBusinessHolder(business: Business): Resource<Business> {
+    override suspend fun addMyBusinessHolder(businessModel: BusinessModel): Resource<BusinessModel> {
         return try {
-            db.add(business).await()
-            Resource.Success(business)
+            db.add(businessModel).await()
+            Resource.Success(businessModel)
         } catch (e: Exception) {
             Resource.Failure(e)
         }
     }
 
-    override suspend fun updateMyBusiness(business: Business): Resource<Business> {
+    override suspend fun updateMyBusiness(businessModel: BusinessModel): Resource<BusinessModel> {
         return try {
-            business.updatedAt = currentDateTime
-            db.document(business.id).set(business).await()
-            Resource.Success(business)
+            businessModel.updatedAt = currentDateTime
+            db.document(businessModel.id).set(businessModel).await()
+            Resource.Success(businessModel)
         } catch (e: Exception) {
             Resource.Failure(e)
         }    }

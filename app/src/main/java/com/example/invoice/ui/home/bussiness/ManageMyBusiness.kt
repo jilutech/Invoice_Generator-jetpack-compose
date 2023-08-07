@@ -55,7 +55,7 @@ fun ManageMyBusiness(viewModel: BusinessViewModel, navController: NavController)
     val email = viewModel.email.collectAsState()
 
     val areInputsValid = viewModel.areValidated.collectAsState()
-    val addBusinessResult = viewModel.manageMyBusiness.collectAsState()
+    val addBusinessResult = viewModel.manageMyBusinessModel.collectAsState()
 
     val isUpdating = viewModel.isUpdate.collectAsState()
 

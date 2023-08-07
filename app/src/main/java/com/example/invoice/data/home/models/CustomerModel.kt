@@ -1,6 +1,6 @@
 package com.example.invoice.data.home.repo.models
 
-data class Customer(
+data class CustomerModel(
     var name: String = "",
     var address: String = "",
     var phone: String = "",

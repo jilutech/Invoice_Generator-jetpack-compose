@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.invoice.data.Resource
-import com.example.invoice.data.home.repo.models.Customer
+import com.example.invoice.data.home.repo.models.CustomerModel
 import com.example.invoice.data.home.repo.models.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,11 +31,11 @@ class CustomersViewModel @Inject constructor(
     val areInputValid : StateFlow<Boolean> = _areInputValid
 
 
-    private val _manageCustomerResult = MutableStateFlow<Resource<Customer>?>(null)
-    val manageCustomerResult: StateFlow<Resource<Customer>?> = _manageCustomerResult
+    private val _manageCustomerResult = MutableStateFlow<Resource<CustomerModel>?>(null)
+    val manageCustomerResult: StateFlow<Resource<CustomerModel>?> = _manageCustomerResult
 
-    private val _customers = MutableStateFlow<Resource<List<Customer>>?>(null)
-    val customer : StateFlow<Resource<List<Customer>>?> = _customers
+    private val _customers = MutableStateFlow<Resource<List<CustomerModel>>?>(null)
+    val customer : StateFlow<Resource<List<CustomerModel>>?> = _customers
     init {
         init()
     }
@@ -61,7 +61,7 @@ class CustomersViewModel @Inject constructor(
     fun addCustomer() = viewModelScope.launch {
 
         _manageCustomerResult.value = Resource.Loading
-        val customer = Customer(name.value,address.value, phone.value,email.value)
+        val customer = CustomerModel(name.value,address.value, phone.value,email.value)
         _manageCustomerResult.value = customerRepository.addAddress(customer)
         getCustomers()
 
@@ -69,8 +69,8 @@ class CustomersViewModel @Inject constructor(
 
     fun updateCustomer() = viewModelScope.launch {
         _manageCustomerResult.value = Resource.Loading
-        val custmomer = Customer(name.value,address.value,phone.value,email.value).also {
-            it.id = _isUpdating.value ?: throw IllegalArgumentException("Business Id is null, you must call setUpdating() first")
+        val custmomer = CustomerModel(name.value,address.value,phone.value,email.value).also {
+            it.id = _isUpdating.value ?: throw IllegalArgumentException("BusinessModel Id is null, you must call setUpdating() first")
         }
         _manageCustomerResult.value = customerRepository.updateCustomer(custmomer)
         getCustomers()
@@ -80,12 +80,12 @@ class CustomersViewModel @Inject constructor(
         _isUpdating.value?.let {
             _manageCustomerResult.value = Resource.Loading
             customerRepository.deleteCustomer(it)
-            _manageCustomerResult.value = Resource.Success(Customer())
+            _manageCustomerResult.value = Resource.Success(CustomerModel())
         }
         getCustomers()
     }
 
-    fun setUpdating(customer: Customer?) {
+    fun setUpdating(customer: CustomerModel?) {
         if (customer != null) {
             _isUpdating.value = customer.id
             name.value = customer.name

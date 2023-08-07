@@ -4,9 +4,9 @@ import com.example.invoice.data.Resource
 
 interface CustomerRepository {
 
-    suspend fun getCustomers() : Resource<List<Customer>>
-    suspend fun addAddress(customer: Customer) : Resource<Customer>
-    suspend fun updateCustomer(customer: Customer) : Resource<Customer>
+    suspend fun getCustomers() : Resource<List<CustomerModel>>
+    suspend fun addAddress(customer: CustomerModel) : Resource<CustomerModel>
+    suspend fun updateCustomer(customer: CustomerModel) : Resource<CustomerModel>
     suspend fun deleteCustomer(id : String) : Resource<Boolean>
 
 

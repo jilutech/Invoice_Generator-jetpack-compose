@@ -14,9 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.invoice.R
 import com.example.invoice.data.Resource
@@ -32,7 +30,7 @@ fun BusinessScreen(businessViewModel: BusinessViewModel,navController:NavControl
 
     val context = LocalContext.current
     val canAddBusiness = businessViewModel.canAddBusiness.collectAsState()
-    val myBusinessHolders = businessViewModel.getMyBusiness.collectAsState()
+    val myBusinessHolders = businessViewModel.getMyBusinessModel.collectAsState()
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         floatingActionButton ={
@@ -65,7 +63,7 @@ fun BusinessScreen(businessViewModel: BusinessViewModel,navController:NavControl
                                 items(it.result){  item ->
 
                                     BusinessCard(
-                                        business = item,
+                                        businessModel = item,
                                         onClick = {
                                            businessViewModel.setUpdating(item)
                                            navController.navigate(AppScreen.MyBusinesses.ManageMyBusiness.route)

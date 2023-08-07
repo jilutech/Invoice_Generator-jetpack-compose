@@ -42,6 +42,11 @@ import com.example.invoice.ui.home.customers.CustomersViewModel
 import com.example.invoice.ui.home.customers.ManageCustomer
 import com.example.invoice.ui.home.dashboard.DashboardScreen
 import com.example.invoice.ui.home.invoice.InvoiceScreen
+import com.example.invoice.ui.home.invoice.InvoicesViewModel
+import com.example.invoice.ui.home.invoice.manage.AddInvoiceItem
+import com.example.invoice.ui.home.invoice.manage.PickBusinessScreen
+import com.example.invoice.ui.home.invoice.manage.PickCustomerScreen
+import com.example.invoice.ui.home.invoice.manage.PickTaxScreen
 import com.example.invoice.ui.home.tax.ManageTax
 import com.example.invoice.ui.home.tax.TaxScreen
 import com.example.invoice.ui.home.tax.TaxViewModel
@@ -161,6 +166,25 @@ fun Navigation(
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
             InvoiceScreen(hiltViewModel(),navController)
+        }
+        composable(AppScreen.Invoices.ManageInvoice.PickBusiness.route) {
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            PickBusinessScreen(vm, navController)
+        }
+
+        composable(AppScreen.Invoices.ManageInvoice.PickCustomer.route) {
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            PickCustomerScreen(vm, navController)
+        }
+
+        composable(AppScreen.Invoices.ManageInvoice.PickTax.route) {
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            PickTaxScreen(vm, navController)
+        }
+
+        composable(AppScreen.Invoices.ManageInvoice.AddItems.route) {
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            AddInvoiceItem(vm, navController)
         }
     }
 }

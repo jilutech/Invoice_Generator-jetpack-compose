@@ -18,12 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.invoice.R
-import com.example.invoice.data.home.repo.models.Customer
+import com.example.invoice.data.home.repo.models.CustomerModel
 import com.example.invoice.ui.theme.InvoiceTheme
 import com.example.invoice.ui.theme.spacing
 
 @Composable
-fun Customer(customer: Customer, onClick : () -> Unit){
+fun Customer(customer: CustomerModel, onClick : () -> Unit){
     var spacing = MaterialTheme.spacing
 
     Card(
@@ -86,7 +86,7 @@ fun Customer(customer: Customer, onClick : () -> Unit){
 fun Preview(){
     InvoiceTheme{
         Customer(
-            Customer(
+            CustomerModel(
                 name ="Jilumon T Jose",
                 address = "Thoppil House,Thrickodithanam Chanagancherry",
                 phone = "9495576063",
@@ -102,7 +102,7 @@ fun PreView(){
     InvoiceTheme {
         InvoiceTheme{
             Customer(
-                Customer(
+                CustomerModel(
                     name ="Jilumon T Jose",
                     address = "Thoppil House,Thrickodithanam Chanagancherry",
                     phone = "9495576063",

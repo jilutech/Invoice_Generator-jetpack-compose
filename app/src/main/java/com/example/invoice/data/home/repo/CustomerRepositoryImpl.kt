@@ -1,7 +1,7 @@
 package com.example.invoice.data.home.repo
 
 import com.example.invoice.data.Resource
-import com.example.invoice.data.home.repo.models.Customer
+import com.example.invoice.data.home.repo.models.CustomerModel
 import com.example.invoice.data.home.repo.models.CustomerRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,18 +14,18 @@ import java.lang.Exception
 class CustomerRepositoryImpl @Inject constructor(
     var fireAuth :FirebaseAuth,
     var firebaseFireStore : FirebaseFirestore
-) : CustomerRepository,BaseRepository<Customer>(fireAuth,firebaseFireStore, DB_CUSTOMERS) {
-    override suspend fun getCustomers(): Resource<List<Customer>> {
+) : CustomerRepository,BaseRepository<CustomerModel>(fireAuth,firebaseFireStore, DB_CUSTOMERS) {
+    override suspend fun getCustomers(): Resource<List<CustomerModel>> {
         return try {
             val snapshot =db.get().await()
-            Resource.Success(getData(snapshot = snapshot,Customer::class.java))
+            Resource.Success(getData(snapshot = snapshot,CustomerModel::class.java))
         }catch (e:Exception){
             Resource.Failure(e)
         }
 
     }
 
-    override suspend fun addAddress(customer: Customer): Resource<Customer> {
+    override suspend fun addAddress(customer: CustomerModel): Resource<CustomerModel> {
         return try {
           db.add(customer).await()
             Resource.Success(customer)
@@ -34,7 +34,7 @@ class CustomerRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateCustomer(customer: Customer): Resource<Customer> {
+    override suspend fun updateCustomer(customer: CustomerModel): Resource<CustomerModel> {
         return try {
             customer.updatedAt = currentDateTime
             db.document(customer.id).set(customer).await()

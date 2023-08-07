@@ -3,7 +3,7 @@ package com.example.invoice.ui.home.bussiness
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.invoice.data.Resource
-import com.example.invoice.data.home.models.Business
+import com.example.invoice.data.home.models.BusinessModel
 import com.example.invoice.data.home.repo.MyBusinessRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,11 +29,11 @@ class BusinessViewModel @Inject constructor(
     val areValidated : MutableStateFlow<Boolean> = _areValidated
 
 
-    private val _getMyBusiness = MutableStateFlow<Resource<List<Business>>?>(null)
-    val getMyBusiness : MutableStateFlow<Resource<List<Business>>?> =_getMyBusiness
+    private val _getMyBusinessModel = MutableStateFlow<Resource<List<BusinessModel>>?>(null)
+    val getMyBusinessModel : MutableStateFlow<Resource<List<BusinessModel>>?> =_getMyBusinessModel
 
-    private val _manageMyBusiness = MutableStateFlow<Resource<Business>?>(null)
-    val manageMyBusiness : MutableStateFlow<Resource<Business>?> = _manageMyBusiness
+    private val _manageMyBusinessModel = MutableStateFlow<Resource<BusinessModel>?>(null)
+    val manageMyBusinessModel : MutableStateFlow<Resource<BusinessModel>?> = _manageMyBusinessModel
 
     private val _canAddBusiness = MutableStateFlow(true)
     val canAddBusiness  = _canAddBusiness
@@ -51,41 +51,41 @@ class BusinessViewModel @Inject constructor(
     }
 
     fun addMyBusinessHolder()=viewModelScope.launch {
-        _manageMyBusiness.value = Resource.Loading
-        val business = Business(name.value,address.value, phone.value, email.value)
-        _manageMyBusiness.value = repository.addMyBusinessHolder(business)
+        _manageMyBusinessModel.value = Resource.Loading
+        val businessModel = BusinessModel(name.value,address.value, phone.value, email.value)
+        _manageMyBusinessModel.value = repository.addMyBusinessHolder(businessModel)
         getMyBusiness()
     }
     fun updateMyBusinessHolder() = viewModelScope.launch {
-        _manageMyBusiness.value = Resource.Loading
-        val business = Business(name.value,address.value, phone.value, email.value).also {
-            it.id = _isUpdate.value ?: throw IllegalArgumentException("Business Id is null, you must call setUpdating() first")
+        _manageMyBusinessModel.value = Resource.Loading
+        val businessModel = BusinessModel(name.value,address.value, phone.value, email.value).also {
+            it.id = _isUpdate.value ?: throw IllegalArgumentException("BusinessModel Id is null, you must call setUpdating() first")
         }
-        _manageMyBusiness.value = repository.updateMyBusiness(business)
+        _manageMyBusinessModel.value = repository.updateMyBusiness(businessModel)
         getMyBusiness()
     }
 
     fun deleteMyBusiness() = viewModelScope.launch {
         _isUpdate.value?.let {
-        _manageMyBusiness.value = Resource.Loading
+        _manageMyBusinessModel.value = Resource.Loading
         repository.deleteMyBusinessHolder(it)
-            _manageMyBusiness.value  = Resource.Success(Business())
+            _manageMyBusinessModel.value  = Resource.Success(BusinessModel())
         }
         getMyBusiness()
     }
     fun getMyBusiness() = viewModelScope.launch {
-        _getMyBusiness.value = Resource.Loading
-        _getMyBusiness.value = repository.getMyBusinessHolders()
+        _getMyBusinessModel.value = Resource.Loading
+        _getMyBusinessModel.value = repository.getMyBusinessHolders()
     }
 
 
-    fun setUpdating(business: Business?) {
-        if (business != null) {
-            _isUpdate.value = business.id
-            name.value = business.name
-            address.value = business.address
-            phone.value = business.phone
-            email.value = business.email
+    fun setUpdating(businessModel: BusinessModel?) {
+        if (businessModel != null) {
+            _isUpdate.value = businessModel.id
+            name.value = businessModel.name
+            address.value = businessModel.address
+            phone.value = businessModel.phone
+            email.value = businessModel.email
             validatesInput()
         } else {
             isUpdate.value = null
@@ -101,7 +101,7 @@ class BusinessViewModel @Inject constructor(
     }
 
     fun resetResource() {
-        manageMyBusiness.value = null
+        manageMyBusinessModel.value = null
     }
 
 

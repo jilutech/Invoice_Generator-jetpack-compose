@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.invoice.data.Resource
-import com.example.invoice.data.home.models.Business
+import com.example.invoice.data.home.models.BusinessModel
 import com.example.invoice.data.home.models.InvoiceItemModel
 import com.example.invoice.data.home.models.InvoiceModel
 import com.example.invoice.data.home.models.TaxModel
 import com.example.invoice.data.home.repo.InvoiceRepository
 import com.example.invoice.data.home.repo.MyBusinessRepository
 import com.example.invoice.data.home.repo.TaxRepository
-import com.example.invoice.data.home.repo.models.Customer
+import com.example.invoice.data.home.repo.models.CustomerModel
 import com.example.invoice.data.home.repo.models.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,11 +31,11 @@ class InvoicesViewModel @Inject constructor(
     val qty = MutableStateFlow("")
     val price = MutableStateFlow("")
 
-    private val _businesses = MutableStateFlow<Resource<List<Business>>?>(null)
-    val businesses: StateFlow<Resource<List<Business>>?> = _businesses
+    private val _businesses = MutableStateFlow<Resource<List<BusinessModel>>?>(null)
+    val businesses: StateFlow<Resource<List<BusinessModel>>?> = _businesses
 
-    private val _customers = MutableStateFlow<Resource<List<Customer>>?>(null)
-    val customers: StateFlow<Resource<List<Customer>>?> = _customers
+    private val _customers = MutableStateFlow<Resource<List<CustomerModel>>?>(null)
+    val customers: StateFlow<Resource<List<CustomerModel>>?> = _customers
 
     private val _taxes = MutableStateFlow<Resource<List<TaxModel>>?>(null)
     val taxes: StateFlow<Resource<List<TaxModel>>?> = _taxes
@@ -96,11 +96,11 @@ class InvoicesViewModel @Inject constructor(
         _areInputsValid.value = valid
     }
 
-    fun setBusiness(business: Business) {
-        _invoice.value = _invoice.value.copy(business = business)
+    fun setBusiness(businessModel: BusinessModel) {
+        _invoice.value = _invoice.value.copy(businessModel = businessModel)
     }
 
-    fun setCustomer(customer: Customer) {
+    fun setCustomer(customer: CustomerModel) {
         _invoice.value = _invoice.value.copy(customer = customer)
         Log.e("t", "t")
     }
@@ -160,7 +160,7 @@ class InvoicesViewModel @Inject constructor(
 
     fun canCreateInvoice(): Boolean {
         val invoice = _invoice.value
-        return invoice.business != null && invoice.customer != null && invoice.tax != null && invoice.listOfItems.isNotEmpty()
+        return invoice.businessModel != null && invoice.customer != null && invoice.tax != null && invoice.listOfItems.isNotEmpty()
     }
 
     fun deleteInvoice(id: String) = viewModelScope.launch {

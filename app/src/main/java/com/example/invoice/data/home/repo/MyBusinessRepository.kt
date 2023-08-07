@@ -1,15 +1,15 @@
 package com.example.invoice.data.home.repo
 
 import com.example.invoice.data.Resource
-import com.example.invoice.data.home.models.Business
+import com.example.invoice.data.home.models.BusinessModel
 
 interface MyBusinessRepository {
 
-    suspend fun getMyBusinessHolders() : Resource<List<Business>>
+    suspend fun getMyBusinessHolders() : Resource<List<BusinessModel>>
 
-    suspend fun addMyBusinessHolder(business: Business) : Resource<Business>
+    suspend fun addMyBusinessHolder(businessModel: BusinessModel) : Resource<BusinessModel>
 
-    suspend fun updateMyBusiness (business: Business) : Resource<Business>
+    suspend fun updateMyBusiness (businessModel: BusinessModel) : Resource<BusinessModel>
 
     suspend fun canAddMyBusiness() : Boolean
 

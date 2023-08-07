@@ -34,7 +34,7 @@ fun InvoiceScreen(invoicesViewModel: InvoicesViewModel,navController: NavControl
         floatingActionButton = {
                                FloatingActionButton(onClick = {
                                    invoicesViewModel.initNewInvoice()
-                                   navController.navigate(AppScreen.Invoices.ManageInvoice.route)
+                                   navController.navigate(AppScreen.Invoices.ManageInvoice.PickBusiness.route)
                                }
                                ) {
                                 Icon(Icons.Filled.Add, stringResource(id = R.string.empty) )
