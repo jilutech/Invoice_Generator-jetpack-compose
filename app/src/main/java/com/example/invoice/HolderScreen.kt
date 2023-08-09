@@ -167,7 +167,8 @@ fun Navigation(
         }
         composable(AppScreen.Invoices.route) {
             onStatusBarColorChange(MaterialTheme.colors.background)
-            InvoiceScreen(hiltViewModel(),navController)
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            InvoiceScreen(vm,navController)
         }
         composable(AppScreen.Invoices.ManageInvoice.PickBusiness.route) {
             val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
@@ -188,8 +189,13 @@ fun Navigation(
             val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
             AddInvoiceItem(vm, navController)
         }
+        composable(AppScreen.Invoices.ManageInvoice.route) {
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            AddInvoiceItem(vm, navController)
+        }
         composable(AppScreen.Invoices.InvoiceDetail.route) {
-            InvoiceDetail(hiltViewModel(), rememberNavController())
+            val vm = navController.getViewModelInstance<InvoicesViewModel>(it, AppScreen.Invoices.route)
+            InvoiceDetail(vm, rememberNavController())
         }
     }
 }
