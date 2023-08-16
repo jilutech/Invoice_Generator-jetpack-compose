@@ -43,7 +43,7 @@ class MainActivity : BaseActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = androidx.compose.material.MaterialTheme.colors.background
                     ) {
-                        HolderScreen(
+                        HolderScreens(
                             onStatusBarColorChange = {
                                 /** Updating the color of the status bar */
                                 statusBarColor = it.toArgb()

@@ -134,7 +134,8 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
         Button(
             onClick = {
                 viewModel.loginValidation(
-                    email.trim(), password.trim()
+//                    email.trim(), password.trim()
+                    email = "jilu@gmail.com", password = "123456"
                     ,
                     onAuthenticated = {
                         navController.navigate(AppScreen.Dashboard.route) {
