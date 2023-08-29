@@ -1,5 +1,6 @@
 package com.example.invoice
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateDp
@@ -71,6 +72,7 @@ import com.example.invoice.ui.home.tax.TaxViewModel
 import com.example.invoice.ui.utils.getViewModelInstance
 import kotlinx.coroutines.launch
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun HolderScreens(
     onStatusBarColorChange: (color: Color) -> Unit,
@@ -191,7 +193,7 @@ fun ScaffoldSection(
     ) { paddingValues ->
         Column(
             Modifier.padding(paddingValues)
-                .background(Color.Black)
+                .background(MaterialTheme.colors.background)
         ) {
             NavHost(
                 modifier = Modifier.weight(1f),

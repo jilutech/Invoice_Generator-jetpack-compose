@@ -3,6 +3,7 @@ package com.example.invoice
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,18 +25,18 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             /** The status bar color which is dynamic */
-            val defaultStatusBarColor = androidx.compose.material.MaterialTheme.colors.background.toArgb()
+            val defaultStatusBarColor = MaterialTheme.colors.background.toArgb()
             var statusBarColor by remember { mutableStateOf(defaultStatusBarColor) }
             window.statusBarColor = statusBarColor
 
             val navController = rememberNavController()
 
-            /** Getting screen size */
-            val size = LocalContext.current.getScreenSize()
+//            /** Getting screen size */
+//            val size = LocalContext.current.getScreenSize()
 
             InvoiceTheme {
                 CompositionLocalProvider(
-                    LocalScreenSize provides size,
+//                    LocalScreenSize provides size,
                     LocalNavHost provides navController
                 ) {
                     // A surface container using the 'background' color from the theme

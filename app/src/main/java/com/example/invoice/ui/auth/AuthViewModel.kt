@@ -37,7 +37,9 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun loginValidation(email: String, password: String,onAuthenticated: () -> Unit,onAuthenticatedFailed: (error: String) -> Unit){
+    fun loginValidation(email: String, password:
+                        String,onAuthenticated: () -> Unit,
+                        onAuthenticatedFailed: (error: String) -> Unit){
         if (email.trim().isNotEmpty() && password.trim().isNotEmpty()){
             _loginFlow.value = Resource.Loading
             viewModelScope.launch {

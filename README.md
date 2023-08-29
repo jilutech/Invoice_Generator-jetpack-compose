@@ -14,6 +14,7 @@ In this app, I used the following :
 11. Timber for logging
 12. Firebase Cloud Firestore for storing data 
 11. Timber for logging
+12. JUnit 4 for unit testing 
 
 Please don't forget the stars  ⭐⭐⭐⭐⭐ 
 
