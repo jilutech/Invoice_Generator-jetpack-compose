@@ -32,7 +32,7 @@ class SignUpTest{
             "rose",
             "123"
         )
-        assertThat(result).isTrue()
+        assertThat(result).isFalse()
     }
 
 }
